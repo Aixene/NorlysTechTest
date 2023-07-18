@@ -1,0 +1,61 @@
+﻿@model Employee
+@{
+    ViewBag.Title = "Add an Employee";
+}
+
+<h2>Add an Employee <a asp-action="Index" class="btn btn-sm btn-secondary">Back</a></h2>
+<form asp-action="AddEmployee" method="post">
+    <div class="form-group">
+        <label for="FirstName">First Name:</label>
+        <input class="form-control" name="FirstName" />
+    </div>
+    <div class="form-group">
+        <label for="LastName">Last Name:</label>
+        <input class="form-control" name="LastName" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="BirthDate">Birth Date</label>
+        <input class="form-control" asp-for="BirthDate" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MainOfficeId">Main Office Id</label>
+        <select class="form-control form-select-sm form-select" asp-for="MainOfficeId" asp-items="@ViewBag.offices"></select>
+    </div>
+
+    <div class="text-center panel-body">
+        <button type="submit" class="btn btn-sm btn-primary">Add</button>
+    </div>
+</form>
+
+@if (Model != null && Model.Id != -1)
+{
+    <h2>Employee</h2>
+    <table class="table table-sm table-striped table-bordered m-2">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Birthday</th>
+                <th>Office ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Id</td>
+                <td>@Model.FirstName</td>
+                <td>@Model.LastName</td>
+                <th>@Model.BirthDate</th>
+                <th>@Model.MainOfficeId</th>
+            </tr>
+        </tbody>
+    </table>
+}
+
+@if (Model != null && Model.Id == -1)
+{
+    <h2>Invalid Employee</h2>
+    
+}

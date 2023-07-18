@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Employee>
+
+@{
+    ViewData["Title"] = "All Employees";
+}
+
+<h2>All Employees</h2>
+<a asp-action="AddEmployee" class="btn btn-sm btn-primary">Add Employee</a>
+<a asp-action="GetEmployee" class="btn btn-sm btn-secondary">Get Employee</a>
+<a asp-action="OfficeIndex" class="btn btn-sm btn-secondary">View Offices</a>
+
+<table class="table table-sm table-striped table-bordered m-2">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>BirthDate</th>
+            <th>OfficeID</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var e in Model)
+        {
+            <tr>
+                <td>@e.Id</td>
+                <td>@e.FirstName</td>
+                <td>@e.LastName</td>
+                <td>@e.BirthDate</td>
+                <th>@e.MainOfficeId</th>
+                <td>
+                    <a asp-action="UpdateEmployee" asp-route-id="@e.Id" class="btn btn-sm btn-primary">
+                        Update
+                    </a>
+                </td>
+                <td>
+                    <form asp-action="DeleteEmployee" method="post">
+                        <input type="hidden" value="@e.Id" name="EmployeeId" />
+                        <button type="submit" class="btn btn-sm btn-primary">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
